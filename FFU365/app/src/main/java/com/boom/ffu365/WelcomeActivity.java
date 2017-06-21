@@ -5,10 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 
 public class WelcomeActivity extends Activity {
@@ -31,7 +28,7 @@ public class WelcomeActivity extends Activity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-                startActivity(new Intent(WelcomeActivity.this,LoginActivity.class));
+                startActivity(new Intent(WelcomeActivity.this,MainActivity.class));
             }
         });
 
