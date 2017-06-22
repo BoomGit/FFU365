@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FFU365.iml" filepath="$PROJECT_DIR$/FFU365.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baseutil/baseutil.iml" filepath="$PROJECT_DIR$/baseutil/baseutil.iml" />
     </modules>
   </component>
 </project>
