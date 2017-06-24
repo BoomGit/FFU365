@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.ImageView;
 
 public class WelcomeActivity extends Activity {
@@ -29,6 +30,8 @@ public class WelcomeActivity extends Activity {
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
                 startActivity(new Intent(WelcomeActivity.this,MainActivity.class));
+                //在主页面按返回又回到Welcome  你一进主页面就应该从Task里面移除
+                finish();
             }
         });
 
