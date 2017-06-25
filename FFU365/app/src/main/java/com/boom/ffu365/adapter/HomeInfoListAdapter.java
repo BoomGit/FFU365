@@ -43,11 +43,9 @@ public class HomeInfoListAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         if(convertView == null){
             convertView =  View.inflate(mContext, R.layout.item_industry_information,null);
-
             viewHolder = new ViewHolder();
             viewHolder.newsText = (TextView) convertView.findViewById(R.id.news_text);
             viewHolder.newDate = (TextView) convertView.findViewById(R.id.news_date);
-
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();

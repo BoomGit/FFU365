@@ -1,4 +1,6 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:boom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/root_bg_color" >
@@ -16,11 +18,12 @@
             android:focusableInTouchMode="true"
             android:orientation="vertical" >
 
-            <ImageView
+            <com.boom.ffu365.ui.PropertionImageView
                 android:id="@+id/adbanner_iv"
-                android:scaleType="fitXY"
+                boom:widthPropertion="3"
+                boom:heightPropertion="1"
                 android:layout_width="match_parent"
-                android:layout_height="160dp" />
+                android:layout_height="0dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -239,11 +242,12 @@
                 android:textColor="@color/title_black"
                 android:textSize="14sp" />
 
-            <ImageView
-                android:scaleType="fitXY"
+            <com.boom.ffu365.ui.PropertionImageView
                 android:id="@+id/recommended_company"
+                boom:widthPropertion="2"
+                boom:heightPropertion="1"
                 android:layout_width="match_parent"
-                android:layout_height="160dp" />
+                android:layout_height="0dp" />
 
 
             <TextView
@@ -267,4 +271,4 @@
                 android:dividerHeight="1px" />
         </LinearLayout>
     </ScrollView>
-</RelativeLayout>
+</LinearLayout>

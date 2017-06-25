@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PropertionImageView">
+        <!-- name 是待会你在布局文件里面应用的名字  format是声明的格式-->
+        <attr name="widthPropertion" format="float" />
+        <attr name="heightPropertion" format="float" />
+    </declare-styleable>
+</resources>
