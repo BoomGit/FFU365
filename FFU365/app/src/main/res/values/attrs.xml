@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="PropertionImageView">
-        <!-- name 是待会你在布局文件里面应用的名字  format是声明的格式-->
+        <!-- name 是待会你在布局文件里面应用的名字  format是声明的格式  dimension  20dp 高度  reference  资源引用  @drawable -->
         <attr name="widthPropertion" format="float" />
         <attr name="heightPropertion" format="float" />
     </declare-styleable>
