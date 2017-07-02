@@ -9,6 +9,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.boom.ffu365.util.ActivityManagerUtil;
+
 /**
  * Created by Boom on 2017/6/24.
  *  显示网页连接 Activity
@@ -23,6 +25,8 @@ public class DetailLinkActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 自己单独统一管理activity
+        ActivityManagerUtil.getInstance().addActivity(this);
         setContentView(R.layout.activity_detail_link);
         mWebView = (WebView) findViewById(R.id.web_view);
         //获取上个页面传递过来的url

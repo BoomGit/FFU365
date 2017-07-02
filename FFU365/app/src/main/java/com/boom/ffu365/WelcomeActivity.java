@@ -9,11 +9,15 @@ import android.os.Bundle;
 import android.view.Window;
 import android.widget.ImageView;
 
+import com.boom.ffu365.util.ActivityManagerUtil;
+
 public class WelcomeActivity extends Activity {
     ImageView img_iv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 自己单独统一管理activity
+        ActivityManagerUtil.getInstance().addActivity(this);
         setContentView(R.layout.activity_welcome);
         img_iv = (ImageView) findViewById(R.id.img_iv);
         //停顿几秒，然后跳转到主界面，如果你刚开始打开界面，黑一块 主界面加载很多资源
@@ -31,7 +35,8 @@ public class WelcomeActivity extends Activity {
                 super.onAnimationEnd(animation);
                 startActivity(new Intent(WelcomeActivity.this,MainActivity.class));
                 //在主页面按返回又回到Welcome  你一进主页面就应该从Task里面移除
-                finish();
+                // 在主页面按返回又回到了Welcome  你一进主页面就应该从Task 里面移除
+                ActivityManagerUtil.getInstance().finishActivity(WelcomeActivity.this);
             }
         });
 

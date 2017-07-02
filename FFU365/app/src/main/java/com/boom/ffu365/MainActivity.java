@@ -1,5 +1,7 @@
 package com.boom.ffu365;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -13,6 +15,7 @@ import com.boom.ffu365.fragment.CenterFragment;
 import com.boom.ffu365.fragment.CollectionFragment;
 import com.boom.ffu365.fragment.HomeFragment;
 import com.boom.ffu365.fragment.MessageFragment;
+import com.boom.ffu365.util.ActivityManagerUtil;
 
 import java.util.ArrayList;
 
@@ -28,13 +31,15 @@ import static com.boom.ffu365.R.id.rbtn4;
  *  3.ViewGroup+Fragment+动态切换  会不断的销毁和创建
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
     private ViewPager mViewPager;
     private RadioButton rbtn1,rbtn2,rbtn3,rbtn4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 自己单独统一管理activity
+        ActivityManagerUtil.getInstance().addActivity(this);
         setContentView(R.layout.activity_main);
         mViewPager= (ViewPager) findViewById(R.id.mViewPager);
 
@@ -55,58 +60,64 @@ public class MainActivity extends AppCompatActivity {
         rbtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            mViewPager.setCurrentItem(0,false);//false代表切换的时候不显示滑动效果
+                mViewPager.setCurrentItem(0,false);//false代表切换的时候不显示滑动效果
+                //找到原来位置，然后把原来的位置恢复
+                onPageSelected(mViewPager.getCurrentItem());
             }
         });
         rbtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mViewPager.setCurrentItem(1,false);
+                //先判断一下用户有没有登录
+                SharedPreferences sp = getSharedPreferences("info",MODE_PRIVATE);
+                boolean isLogin = sp.getBoolean("is_login",false);
+                if (isLogin){
+                    //把ViewPager切换到第二页
+                    mViewPager.setCurrentItem(1,false);
+                }else {
+                    //如果用户没有登录就跳转到登录界面
+                    Intent intent = new Intent(MainActivity.this,UserLoginActivity.class);
+                    startActivity(intent);
+                    //找到原来位置，然后把原来的位置恢复
+                    onPageSelected(mViewPager.getCurrentItem());
+                }
             }
         });
         rbtn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mViewPager.setCurrentItem(2,false);
+                //先判断一下用户有没有登录
+                SharedPreferences sp = getSharedPreferences("info",MODE_PRIVATE);
+                boolean isLogin = sp.getBoolean("is_login",false);
+                if (isLogin){
+                    mViewPager.setCurrentItem(2,false);
+                }else {
+                    //如果用户没有登录就跳转到登录界面
+                    Intent intent = new Intent(MainActivity.this,UserLoginActivity.class);
+                    startActivity(intent);
+                    //找到原来位置，然后把原来的位置恢复
+                    onPageSelected(mViewPager.getCurrentItem());
+                }
             }
         });
         rbtn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mViewPager.setCurrentItem(3,false);
+                //先判断一下用户有没有登录
+                SharedPreferences sp = getSharedPreferences("info",MODE_PRIVATE);
+                boolean isLogin = sp.getBoolean("is_login",false);
+                if (isLogin){
+                    mViewPager.setCurrentItem(3,false);
+                }else {
+                    //如果用户没有登录就跳转到登录界面
+                    Intent intent = new Intent(MainActivity.this,UserLoginActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
         //设置页面滑动的监听  为了保证滑动之后相应页面改变
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                //切换到相应的页面之后调用
-                switch (position){
-                    case 0:
-                        rbtn1.setChecked(true);
-                        break;
-                    case 1:
-                        rbtn2.setChecked(true);
-                        break;
-                    case 2:
-                        rbtn3.setChecked(true);
-                        break;
-                    case 3:
-                        rbtn4.setChecked(true);
-                        break;
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+        mViewPager.setOnPageChangeListener(this);
     }
 
     private void initData() {
@@ -120,5 +131,34 @@ public class MainActivity extends AppCompatActivity {
         //getSupportFragmentManager()  是fragmentActivity里面的
         HomePagerAdapter homePagerAdapter = new HomePagerAdapter(getSupportFragmentManager(),fragments);
         mViewPager.setAdapter(homePagerAdapter);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        //切换到相应的页面之后调用
+        switch (position){
+            case 0:
+                rbtn1.setChecked(true);
+                break;
+            case 1:
+                rbtn2.setChecked(true);
+                break;
+            case 2:
+                rbtn3.setChecked(true);
+                break;
+            case 3:
+                rbtn4.setChecked(true);
+                break;
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 }
